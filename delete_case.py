@@ -20,7 +20,8 @@ def getOperate(actionStr):
 		myList = actionStr.split ('、')
 		return myList[1]
 	else:
-		return actionStr[0:4]
+		print (actionStr)
+		return actionStr
 		
 		
 def beginFunc(funcName, fileOut):
@@ -42,9 +43,55 @@ def noAction(fileOut, actionStr):
 	fileOut.write("\t还没有实现\n")
 	print ("\t还没有实现\n")
 	
+def masterInsert(actionStr, fileOut):
+	if actionStr == "矩形"：
+		writeToFile(fileOut, "\tCount = ActivePresentation.Designs.Count\n\
+\tIf Count > 0 Then ActivePresentation.Designs(1).SlideMaster.Shapes.AddShape(msoShapeRectangle, 133.25, 94.25, 232.38, 130.38).Select\n")
+	elif actionStr = "线条":
+		writeToFile(fileOut, "\tCount = ActivePresentation.Designs.Count\n\
+\tIf Count > 0 Then ActivePresentation.Designs(1).SlideMaster.Shapes.AddLine(70.88, 338, 428, 394.75).Select\n")
+	elif actionStr = "表格":
+		writeToFile(fileOut, "\tCount = ActivePresentation.Designs.Count\n\
+\tIf Count > 0 Then ActivePresentation.Designs(1).SlideMaster.Shapes.AddTable(3, 3).Select\n")
+	elif actionStr = "图表":
+		writeToFile(fileOut, """\tCount = ActivePresentation.Designs.Count\n\
+\tIf Count > 0 Then\n
+\t\tActivePresentation.Designs(1).SlideMaster.Shapes.AddOLEObject(Left:=120, Top:=110, Width:=480, Height:=320, ClassName:="Et.chart.6", Link:=msoFalse).Select
+		With ActiveWindow.Selection.ShapeRange
+			.Left = 120
+			.Top = 109.875
+			.Width = 480
+			.Height = 320.25
+		End With\n
+	End If\n""")
+		elif actionStr = "艺术字":
+		writeToFile(fileOut, "\tCount = ActivePresentation.Designs.Count\n\
+\tIf Count > 0 Then ActivePresentation.Designs(1).SlideMaster.Shapes.AddTextEffect msoTextEffect15, \"WPS Office\", \"Arial\", 30, ksoFalse, ksoFalse, 0, 0\n\n")
+	
 def operateMaster(file, fileOut, actionStr):
-
-	return getLine(file)
+	if actionStr.split("到")[1] == "母版视图":
+		writeToFile(fileOut,"\tActiveWindow.ViewType = ppViewSlideMaster\n")
+		line = getLine(file)
+		while (line):
+			line = getOperate(line)
+			if (line == "Case"):
+				return line
+			else:
+				print (line)
+				if (line[0:2] == "切换"):
+					return line
+				elif (line[0:4] == "关闭文档"):
+					return line
+				elif (line[0:2] == "插入"):
+					masterInsert(actionStr{2:}, fileOut)
+					line = getOperate(file)
+				elif (line[0:2] == "删除")：
+					masterDelete(actionStr[2:], fileOut)
+					line = getOperate(file)
+				else:
+					print ("\tMaster ToDo\n")
+					return line
+	return actionStr				
 	
 def inputAction(actionStr, fileOut):
 	if (actionStr[0:3] == "占位符" or actionStr[0:2] == "内容"):
@@ -72,7 +119,7 @@ def insertAction(actionStr, fileOut):
     End With\n""",
 	"符号" : "\t\'没有找到相关的API\n",
 	"艺术字" : "\tActiveWindow.Selection.SlideRange.Shapes.AddTextEffect msoTextEffect15, \"WPS Office\", \"Arial\", 30, ksoFalse, ksoFalse, 0, 0\n",
-	"组织结构图" : "\tapi调用有问题\n",
+	"组织结构图" : "\t\'api调用有问题\n",
 	"公式" : "\tActiveWindow.Selection.SlideRange.Shapes.AddOLEObject(Left:=120, Top:=110, Width:=480, Height:=320, ClassName:=\"Equation.KSEE3\", Link:=msoFalse).Select\n\
 \t\'上面只能调出公式编辑窗口，以下流程应该用测试工具保障\n"}
 	
@@ -82,6 +129,12 @@ def insertAction(actionStr, fileOut):
 def deleteAction(actionStr, fileOut):
 	if(actionStr == "输入内容"):
 		writeToFile(fileOut, "\tActivePresentation.Slides.Item(1).Shapes.Item(1).TextFrame.TextRange.Text = \"\"\n")
+	elif (actionStr == "矩形" or actionStr == "线条" or actionStr == "表格" or actionStr == "图表" or actionStr == "艺术字" ):
+		writeToFile(fileOut, """\tCount = ActiveWindow.Selection.SlideRange.Shapes.Count
+\tIf Count > 0 Then ActiveWindow.Selection.SlideRange.Shapes(Count).Delete\n""")
+	else:
+		print ("\tTodo\n")
+		writeToFile(fileOut, "\tTodo\n")
 	
 def operateNormal(file, fileOut, actionStr):
 	canDo(actionStr, fileOut)
@@ -102,7 +155,7 @@ def main():
 	fileName = sys.argv[0]
 	fileDir = fileName.split("delete_case.py")[0]
 
-	file = open(fileDir + "\delete1.txt")
+	file = open(fileDir + "\delete.txt")
 	fileOut = open(fileDir + "\delete_case.txt", 'w')
 	index = 0
 	line = getLine(file)
@@ -134,7 +187,7 @@ def main():
 	file.close()
 	fileOut.write("Sub main()\n")
 	for i in range(1, index):
-		fileOut.write("\tCase%d\n"%(i))
+		fileOut.write("\tCase_%d\n"%(i))
 	endFunc(fileOut)
         
 	fileOut.close()

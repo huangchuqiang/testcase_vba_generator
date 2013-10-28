@@ -1,0 +1,458 @@
+Sub Case_1()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：输入占位符“123”
+	If ActivePresentation.Slides.Count > 0 Then
+		If ActivePresentation.Slides(1).Shapes.Count > 0 Then
+			ActivePresentation.Slides.Item(1).Shapes.Item(1).TextFrame.TextRange.Text = "123"
+		End If
+	End If
+	'操作：删除输入内容
+	ActivePresentation.Slides.Item(1).Shapes.Item(1).TextFrame.TextRange.Text = ""
+End Sub
+Sub Case_2()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入矩形
+	ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, 133.25, 94.25, 232.38, 130.38).Select
+	'操作：删除矩形
+	Count = ActiveWindow.Selection.SlideRange.Shapes.Count
+	If Count > 0 Then ActiveWindow.Selection.SlideRange.Shapes(Count).Delete
+End Sub
+Sub Case_3()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入线条
+	ActiveWindow.Selection.SlideRange.Shapes.AddLine(70.88, 338, 428, 394.75).Select
+	'操作：删除线条
+	Count = ActiveWindow.Selection.SlideRange.Shapes.Count
+	If Count > 0 Then ActiveWindow.Selection.SlideRange.Shapes(Count).Delete
+End Sub
+Sub Case_4()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入公式
+	ActiveWindow.Selection.SlideRange.Shapes.AddOLEObject(Left:=120, Top:=110, Width:=480, Height:=320, ClassName:="Equation.KSEE3", Link:=msoFalse).Select
+	'上面只能调出公式编辑窗口，以下流程应该用测试工具保障
+	'操作：输入内容“testing”
+	If ActivePresentation.Slides.Count > 0 Then
+		If ActivePresentation.Slides(1).Shapes.Count > 0 Then
+			ActivePresentation.Slides.Item(1).Shapes.Item(1).TextFrame.TextRange.Text = "testing"
+		End If
+	End If
+	'操作：删除公式
+	Todo
+End Sub
+Sub Case_5()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入组织结构图
+	'api调用有问题
+	'操作：删除组织结构图
+	Todo
+End Sub
+Sub Case_6()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入表格
+	ActiveWindow.Selection.SlideRange.Shapes.AddTable(3, 3).Select
+	'操作：删除表格
+	Count = ActiveWindow.Selection.SlideRange.Shapes.Count
+	If Count > 0 Then ActiveWindow.Selection.SlideRange.Shapes(Count).Delete
+End Sub
+Sub Case_7()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入艺术字
+	ActiveWindow.Selection.SlideRange.Shapes.AddTextEffect msoTextEffect15, "WPS Office", "Arial", 30, ksoFalse, ksoFalse, 0, 0
+	'操作：删除艺术字
+	Count = ActiveWindow.Selection.SlideRange.Shapes.Count
+	If Count > 0 Then ActiveWindow.Selection.SlideRange.Shapes(Count).Delete
+End Sub
+Sub Case_8()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入图表
+	ActiveWindow.Selection.SlideRange.Shapes.AddOLEObject(Left:=120, Top:=110, Width:=480, Height:=320, ClassName:="Et.chart.6", Link:=msoFalse).Select
+    With ActiveWindow.Selection.ShapeRange
+        .Left = 120
+        .Top = 109.875
+        .Width = 480
+        .Height = 320.25
+    End With
+	'操作：删除图表
+	Count = ActiveWindow.Selection.SlideRange.Shapes.Count
+	If Count > 0 Then ActiveWindow.Selection.SlideRange.Shapes(Count).Delete
+End Sub
+Sub Case_9()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入符号
+	'没有找到相关的API
+	'操作：删除符号
+	Todo
+End Sub
+Sub Case_10()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：输入占位符“123”
+	If ActivePresentation.Slides.Count > 0 Then
+		If ActivePresentation.Slides(1).Shapes.Count > 0 Then
+			ActivePresentation.Slides.Item(1).Shapes.Item(1).TextFrame.TextRange.Text = "123"
+		End If
+	End If
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_11()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入矩形
+	ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, 133.25, 94.25, 232.38, 130.38).Select
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_12()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入线条
+	ActiveWindow.Selection.SlideRange.Shapes.AddLine(70.88, 338, 428, 394.75).Select
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_13()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入公式
+	ActiveWindow.Selection.SlideRange.Shapes.AddOLEObject(Left:=120, Top:=110, Width:=480, Height:=320, ClassName:="Equation.KSEE3", Link:=msoFalse).Select
+	'上面只能调出公式编辑窗口，以下流程应该用测试工具保障
+	'操作：输入内容“testing”
+	If ActivePresentation.Slides.Count > 0 Then
+		If ActivePresentation.Slides(1).Shapes.Count > 0 Then
+			ActivePresentation.Slides.Item(1).Shapes.Item(1).TextFrame.TextRange.Text = "testing"
+		End If
+	End If
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_14()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入组织结构图
+	'api调用有问题
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_15()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入表格
+	ActiveWindow.Selection.SlideRange.Shapes.AddTable(3, 3).Select
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_16()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入艺术字
+	ActiveWindow.Selection.SlideRange.Shapes.AddTextEffect msoTextEffect15, "WPS Office", "Arial", 30, ksoFalse, ksoFalse, 0, 0
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_17()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入图表
+	ActiveWindow.Selection.SlideRange.Shapes.AddOLEObject(Left:=120, Top:=110, Width:=480, Height:=320, ClassName:="Et.chart.6", Link:=msoFalse).Select
+    With ActiveWindow.Selection.ShapeRange
+        .Left = 120
+        .Top = 109.875
+        .Width = 480
+        .Height = 320.25
+    End With
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_18()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入符号
+	'没有找到相关的API
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_19()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：输入占位符“123”
+	If ActivePresentation.Slides.Count > 0 Then
+		If ActivePresentation.Slides(1).Shapes.Count > 0 Then
+			ActivePresentation.Slides.Item(1).Shapes.Item(1).TextFrame.TextRange.Text = "123"
+		End If
+	End If
+	'操作：删除输入内容
+	ActivePresentation.Slides.Item(1).Shapes.Item(1).TextFrame.TextRange.Text = ""
+End Sub
+Sub Case_20()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入矩形
+	ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, 133.25, 94.25, 232.38, 130.38).Select
+	'操作：删除矩形
+	Count = ActiveWindow.Selection.SlideRange.Shapes.Count
+	If Count > 0 Then ActiveWindow.Selection.SlideRange.Shapes(Count).Delete
+End Sub
+Sub Case_21()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入线条
+	ActiveWindow.Selection.SlideRange.Shapes.AddLine(70.88, 338, 428, 394.75).Select
+	'操作：删除线条
+	Count = ActiveWindow.Selection.SlideRange.Shapes.Count
+	If Count > 0 Then ActiveWindow.Selection.SlideRange.Shapes(Count).Delete
+End Sub
+Sub Case_22()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入公式
+	ActiveWindow.Selection.SlideRange.Shapes.AddOLEObject(Left:=120, Top:=110, Width:=480, Height:=320, ClassName:="Equation.KSEE3", Link:=msoFalse).Select
+	'上面只能调出公式编辑窗口，以下流程应该用测试工具保障
+	'操作：输入内容“testing”
+	If ActivePresentation.Slides.Count > 0 Then
+		If ActivePresentation.Slides(1).Shapes.Count > 0 Then
+			ActivePresentation.Slides.Item(1).Shapes.Item(1).TextFrame.TextRange.Text = "testing"
+		End If
+	End If
+	'操作：删除公式
+	Todo
+End Sub
+Sub Case_23()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入组织结构图
+	'api调用有问题
+	'操作：删除组织结构图
+	Todo
+End Sub
+Sub Case_24()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入表格
+	ActiveWindow.Selection.SlideRange.Shapes.AddTable(3, 3).Select
+	'操作：删除表格
+	Count = ActiveWindow.Selection.SlideRange.Shapes.Count
+	If Count > 0 Then ActiveWindow.Selection.SlideRange.Shapes(Count).Delete
+End Sub
+Sub Case_25()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入艺术字
+	ActiveWindow.Selection.SlideRange.Shapes.AddTextEffect msoTextEffect15, "WPS Office", "Arial", 30, ksoFalse, ksoFalse, 0, 0
+	'操作：删除艺术字
+	Count = ActiveWindow.Selection.SlideRange.Shapes.Count
+	If Count > 0 Then ActiveWindow.Selection.SlideRange.Shapes(Count).Delete
+End Sub
+Sub Case_26()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入图表
+	ActiveWindow.Selection.SlideRange.Shapes.AddOLEObject(Left:=120, Top:=110, Width:=480, Height:=320, ClassName:="Et.chart.6", Link:=msoFalse).Select
+    With ActiveWindow.Selection.ShapeRange
+        .Left = 120
+        .Top = 109.875
+        .Width = 480
+        .Height = 320.25
+    End With
+	'操作：删除图表
+	Count = ActiveWindow.Selection.SlideRange.Shapes.Count
+	If Count > 0 Then ActiveWindow.Selection.SlideRange.Shapes(Count).Delete
+End Sub
+Sub Case_27()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入符号
+	'没有找到相关的API
+	'操作：删除符号
+	Todo
+End Sub
+Sub Case_28()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：输入占位符“123”
+	If ActivePresentation.Slides.Count > 0 Then
+		If ActivePresentation.Slides(1).Shapes.Count > 0 Then
+			ActivePresentation.Slides.Item(1).Shapes.Item(1).TextFrame.TextRange.Text = "123"
+		End If
+	End If
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_29()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入矩形
+	ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, 133.25, 94.25, 232.38, 130.38).Select
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_30()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入线条
+	ActiveWindow.Selection.SlideRange.Shapes.AddLine(70.88, 338, 428, 394.75).Select
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_31()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入公式
+	ActiveWindow.Selection.SlideRange.Shapes.AddOLEObject(Left:=120, Top:=110, Width:=480, Height:=320, ClassName:="Equation.KSEE3", Link:=msoFalse).Select
+	'上面只能调出公式编辑窗口，以下流程应该用测试工具保障
+	'操作：输入内容“testing”
+	If ActivePresentation.Slides.Count > 0 Then
+		If ActivePresentation.Slides(1).Shapes.Count > 0 Then
+			ActivePresentation.Slides.Item(1).Shapes.Item(1).TextFrame.TextRange.Text = "testing"
+		End If
+	End If
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_32()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入组织结构图
+	'api调用有问题
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_33()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入表格
+	ActiveWindow.Selection.SlideRange.Shapes.AddTable(3, 3).Select
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_34()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入艺术字
+	ActiveWindow.Selection.SlideRange.Shapes.AddTextEffect msoTextEffect15, "WPS Office", "Arial", 30, ksoFalse, ksoFalse, 0, 0
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_35()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入图表
+	ActiveWindow.Selection.SlideRange.Shapes.AddOLEObject(Left:=120, Top:=110, Width:=480, Height:=320, ClassName:="Et.chart.6", Link:=msoFalse).Select
+    With ActiveWindow.Selection.ShapeRange
+        .Left = 120
+        .Top = 109.875
+        .Width = 480
+        .Height = 320.25
+    End With
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub Case_36()
+	windowsIndex = 1
+	Application.Windows(windowsIndex).Activate
+	'操作：打开文档
+	'操作：插入符号
+	'没有找到相关的API
+	'操作：关闭文档
+	Presentations.Item(windowsIndex).Saved = ksoTrue
+	ActivePresentation.Close
+End Sub
+Sub main()
+	Case_1
+	Case_2
+	Case_3
+	Case_4
+	Case_5
+	Case_6
+	Case_7
+	Case_8
+	Case_9
+	Case_10
+	Case_11
+	Case_12
+	Case_13
+	Case_14
+	Case_15
+	Case_16
+	Case_17
+	Case_18
+	Case_19
+	Case_20
+	Case_21
+	Case_22
+	Case_23
+	Case_24
+	Case_25
+	Case_26
+	Case_27
+	Case_28
+	Case_29
+	Case_30
+	Case_31
+	Case_32
+	Case_33
+	Case_34
+	Case_35
+	Case_36
+End Sub
